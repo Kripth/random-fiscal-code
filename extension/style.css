@@ -1,0 +1,13 @@
+form {
+	width: 360px;
+	margin: 8px 16px;
+}
+
+.title {
+	justify-content: center;
+}
+
+.buttons {
+	justify-content: flex-end;
+	margin-top: 16px;
+}
