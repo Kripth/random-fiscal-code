@@ -1,6 +1,6 @@
 import * as data from "./_data";
 import { encodeName, encodeDate, checksum } from "./encoding";
-import { List } from "./types";
+import { Data, DataEntry } from "./types";
 
 type Gender = "M" | "F";
 
@@ -12,27 +12,29 @@ type Options = {
 	birthplace: string | null;
 };
 
-type Pool = {
-	list: List[];
-	total: number;
-};
-
-function pick([list, total]: [list: List[], total: number]): [string, string] {
-	let seed = Math.random() * total;
-	for(const {name, encoded, weight} of list) {
-		if(weight > seed) {
-			return [name, encoded ?? encodeName(name)];
+function pick({ total, entries }: Data): DataEntry {
+	const seed = Math.floor(Math.random() * total);
+	let min = 0;
+	let max = entries.length - 1;
+	while(true) {
+		const i = min + Math.floor((max - min) / 2);
+		const entry = entries[i];
+		if(seed < entry.min) {
+			max = i - 1;
+		} else if(seed >= entry.max) {
+			min = i + 1;
+		} else {
+			return entry;
 		}
-		seed -= weight;
 	}
-	throw new Error("Oops");
 }
 
-function pickIf(value: string | null, pool: [list: List[], total: number]) {
+function pickIf(value: string | null, data: Data) {
 	if(value) {
-		return [value, encodeName(value)];
+		return [ value, encodeName(value) ];
 	} else {
-		return pick(pool);
+		const { value, encoded } = pick(data);
+		return [ value, encoded ];
 	}
 }
 
@@ -71,7 +73,7 @@ export default function generate(options: Options) {
 
 	const [ birthdate, encodedBirthdate ] = generateDate(options, isMale);
 
-	const birthplace = options.birthplace ?? pick(data.comuni)[0];
+	const birthplace = options.birthplace ?? pick(data.comuni).value;
 
 	const encoded = encodedLastName + encodedFirstName + encodedBirthdate + birthplace;
 	const fiscalCode = encoded + checksum(encoded);
