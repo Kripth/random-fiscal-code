@@ -21,9 +21,9 @@ export class Element {
 					ret += ` ${name}`;
 				} else if(value) {
 					ret += ` ${name}="${value}"`;
-					/*if(value instanceof Translation && keepLocale) {
-						ret += ` data-locale-${name}="${value.key}"`;
-					}*/
+					if(value instanceof Translation && keepLocale) {
+						ret += ` data-locale="${value.key}" data-locale-attr="${name}"`;
+					}
 				}
 			}
 		}

@@ -5,12 +5,12 @@ import { LanguageGroup } from "../utils/lang";
 
 export default function GeneratorForm(lang: LanguageGroup) {
 	return h("form", { id: "form", class: "form-horizontal", style: "margin:0" },
-		InputFormGroup(lang.firstName, "firstName"),
-		InputFormGroup(lang.lastName, "lastName"),
-		SelectFormGroup(lang.gender, "gender", true, { "M": lang.male, "F": lang.female }),
-		InputFormGroup(lang.birthdate, "birthdate", false, "date"),
-		InputFormGroup(lang.birthplace, "birthplace", false, null,"[A-Z][0-9]{3}"),
-		InputFormGroup(lang.fiscalCode, "fiscalCode",true),
+		InputFormGroup({ lang, label: lang.firstName, name: "firstName", action: "clear" }),
+		InputFormGroup({ lang, label: lang.lastName, name: "lastName", action: "clear" }),
+		SelectFormGroup({ lang, label: lang.gender, name: "gender", empty: true, options: { "M": lang.male, "F": lang.female }, action: "clear"}),
+		InputFormGroup({ lang, label: lang.birthdate, name: "birthdate", type: "date", action: "clear" }),
+		InputFormGroup({ lang, label: lang.birthplace, name: "birthplace", pattern: "[A-Z][0-9]{3}", action: "clear" }),
+		InputFormGroup({ lang, label: lang.fiscalCode, name: "fiscalCode", disabled: true, action: "copy" }),
 		h("div", { class: "form-group buttons", style: "justify-content:flex-end" },
 			h("div", { class: "col" },
 				h("button", { type: "button", id: "reset", class: "btn" }, lang.reset),

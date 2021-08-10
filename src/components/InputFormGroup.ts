@@ -1,7 +1,12 @@
 import h from "../utils/element";
-import FormGroup from "./FormGroup";
-import { Translation } from "../utils/lang";
+import FormGroup, { FormGroupProps } from "./FormGroup";
 
-export default function InputFormGroup(label: Translation, name: string, disabled = false, type?: string, pattern?: string) {
-	return FormGroup(label, name, disabled, h("input", { class: "form-input", type, pattern } ));
+interface InputFormGroupProps extends FormGroupProps {
+	type?: string;
+	pattern?: string;
+}
+
+export default function InputFormGroup(props: InputFormGroupProps) {
+	const { type, pattern } = props;
+	return FormGroup(props, h("input", { class: "form-input", type, pattern } ));
 }

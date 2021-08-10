@@ -21,6 +21,8 @@ export class LanguageGroup {
 		public female: Translation,
 		public birthdate: Translation,
 		public birthplace: Translation,
+		public clear: Translation,
+		public copy: Translation,
 		public reset: Translation,
 		public generate: Translation
 	) {}
@@ -46,6 +48,8 @@ function group(
 	female: string,
 	birthdate: string,
 	birthplace: string,
+	clear: string,
+	copy: string,
 	reset: string,
 	generate: string
 ) {
@@ -60,6 +64,8 @@ function group(
 		t("female", female),
 		t("birthdate", birthdate),
 		t("birthplace", birthplace),
+		t("clear", clear),
+		t("copy", copy),
 		t("reset", reset),
 		t("generate", generate)
 	);
@@ -76,6 +82,8 @@ export const en = group(
 	"Female",
 	"Birth Date",
 	"Birth Place",
+	"Clear",
+	"Copy",
 	"Reset",
 	"Generate"
 );
@@ -91,6 +99,8 @@ export const it = group(
 	"Femmina",
 	"Data di Nascita",
 	"Luogo di Nascita",
+	"Cancella",
+	"Copia",
 	"Ripristina",
 	"Genera"
 );

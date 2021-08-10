@@ -1,4 +1,5 @@
 import GeneratorForm from "./GeneratorForm";
+import Toast from "./Toast";
 import { LanguageGroup } from "../utils/lang";
 import h from "../utils/element";
 
@@ -17,6 +18,7 @@ export default function Index(lang: LanguageGroup) {
 			h("div", { style: "margin:0 auto;max-width:800px" },
 				GeneratorForm(lang)
 			),
+			Toast(lang),
 			h("script", { src: "bundle.js" })
 		)
 	);

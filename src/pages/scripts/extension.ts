@@ -42,7 +42,13 @@ button.addEventListener("click", () => {
 });
 
 // init i18n
-document.querySelectorAll("[data-locale]").forEach(element => {
+document.querySelectorAll<HTMLElement>("[data-locale]").forEach(element => {
+	const attr = element.dataset.localeAttr;
 	// @ts-ignore
-	element.textContent = chrome.i18n.getMessage(element.dataset.locale);
+	const message = chrome.i18n.getMessage(element.dataset.locale);
+	if(attr) {
+		element.setAttribute(attr, message);
+	} else {
+		element.textContent = message;
+	}
 });

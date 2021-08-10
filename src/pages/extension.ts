@@ -1,4 +1,5 @@
 import GeneratorForm from "../components/GeneratorForm";
+import Toast from "../components/Toast";
 import { en, it } from "../utils/lang";
 import h from "../utils/element";
 
@@ -23,6 +24,7 @@ export default function Extension() {
 						h("button", { id: "inject", type: "button", class: "btn btn-success", disabled: true }, "Inject")
 					)
 				),
+				Toast(en),
 				h("script", { src: "bundle.js" })
 			)
 		).encode(true),
