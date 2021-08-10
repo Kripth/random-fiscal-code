@@ -3,9 +3,9 @@ import { readFile, writeFile } from "fs";
 // create data from csv
 
 let counter = 0;
-let file = `import { Data, DataEntry } from "./types";
+let file = `import { Data } from "./types";
 
-function parse(...pool: [number, string, string?][]) {
+function parse(...pool: [number, string, string?][]): Data {
 \tlet total = 0;
 \tconst entries = pool.map(([ weight, value, encoded ]) => {
 \t\tconst min = total;
@@ -35,7 +35,7 @@ function readImpl(fname, varname, encoded) {
 			file += `export const ${varname} = parse(${value});\n`;
 		}
 		if(--counter === 0) {
-			writeFile("src/_data.ts", file, () => {});
+			writeFile("src/lib/data.ts", file, () => {});
 		}
 	});
 }

@@ -1,4 +1,7 @@
-.idea
+/.idea
+/docs
+/extension
+!/extension/manifest.json
 node_modules
-package-lock.json
-dist
+/package-lock.json
+/src/lib/data.ts
