@@ -1,5 +1,5 @@
 import * as data from "./data";
-import { encodeName, encodeDate, checksum } from "./encoding";
+import { encodeFirstName, encodeLastName, encodeDate, checksum } from "./encoding";
 import { Data, DataEntry, Options, Result } from "./types";
 
 function pick({ total, entries }: Data): DataEntry {
@@ -19,9 +19,9 @@ function pick({ total, entries }: Data): DataEntry {
 	}
 }
 
-function pickIf(value: string | null, data: Data) {
+function pickIf(value: string | null, data: Data, encode: (value: string) => string) {
 	if(value) {
-		return [ value, encodeName(value) ];
+		return [ value, encode(value) ];
 	} else {
 		const { value, encoded } = pick(data);
 		return [ value, encoded ];
@@ -64,8 +64,8 @@ export default function generate(options: Options): Result {
 	const gender = options.gender ?? (Math.random() >= .5 ? "M" : "F");
 	const isMale = gender === "M";
 
-	const [ firstName, encodedFirstName ] = pickIf(options.firstName, isMale ? data.firstNamesM : data.firstNamesF);
-	const [ lastName, encodedLastName ] = pickIf(options.lastName, data.lastNames);
+	const [ firstName, encodedFirstName ] = pickIf(options.firstName, isMale ? data.firstNamesM : data.firstNamesF, encodeFirstName);
+	const [ lastName, encodedLastName ] = pickIf(options.lastName, data.lastNames, encodeLastName);
 
 	const [ birthdate, encodedBirthdate ] = generateDate(options, isMale);
 

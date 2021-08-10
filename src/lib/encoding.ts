@@ -2,9 +2,19 @@ const months = "ABCDEHLMPRST".split("");
 
 const odds = [1, 0, 5, 7, 9, 13, 15, 17, 19, 21, 2, 4, 18, 20, 11, 3, 6, 8, 12, 14, 16, 10, 22, 25, 24, 23];
 
-export function encodeName(value: string) {
-	return (value.replace(/[ ']/g, "").replace(/[AEIOU]/gi, "") + value.replace(/[^AEIOU]/gi, "") + "XX")
-		.substr(0, 3).toUpperCase();
+export function encodeFirstName(value: string) {
+	const consonants = value.toUpperCase().replace(/[ ']/g, "").replace(/[AEIOU]/g, "");
+	if(consonants.length > 3) {
+		return consonants.charAt(0) + consonants.substr(2, 2);
+	} else {
+		return encodeLastName(value);
+	}
+}
+
+export function encodeLastName(value: string) {
+	const upper = value.toUpperCase();
+	return (upper.replace(/[ ']/g, "").replace(/[AEIOU]/g, "") + upper.replace(/[^AEIOU]/g, "") + "XX")
+		.substr(0, 3);
 }
 
 export function encodeDate([y, m, d]: [number, number, number], isMale: boolean) {
