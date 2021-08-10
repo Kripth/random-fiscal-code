@@ -3,7 +3,7 @@ import { en, it } from "../utils/lang";
 
 export default function() {
 	return {
-		"/index.html": Index(en).toString(),
-		"/it.html": Index(it).toString()
+		"/index.html": Index(en).encode(),
+		"/it.html": Index(it).encode()
 	};
 }

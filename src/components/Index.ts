@@ -1,8 +1,8 @@
 import GeneratorForm from "./GeneratorForm";
-import { Lang } from "../utils/lang";
+import { LanguageGroup } from "../utils/lang";
 import h from "../utils/element";
 
-export default function Index(lang: Lang) {
+export default function Index(lang: LanguageGroup) {
 
 	//TODO add language switch
 	//TODO add footer

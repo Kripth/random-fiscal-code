@@ -40,3 +40,9 @@ button.addEventListener("click", () => {
 		});
 	});
 });
+
+// init i18n
+document.querySelectorAll("[data-locale]").forEach(element => {
+	// @ts-ignore
+	element.textContent = chrome.i18n.getMessage(element.dataset.locale);
+});

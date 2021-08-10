@@ -1,5 +1,5 @@
 import GeneratorForm from "../components/GeneratorForm";
-import { en } from "../utils/lang";
+import { en, it } from "../utils/lang";
 import h from "../utils/element";
 
 export default function Extension() {
@@ -9,14 +9,14 @@ export default function Extension() {
 	return {
 		"popup.html": h("html", {},
 			h("head", {},
-				h("title", {}, "Random Fiscal Code"),
+				h("title", {}, en.title),
 				h("meta", { charset: "UTF-8" }),
 				h("link", { rel: "stylesheet", href: "main.css" })
 			),
 			h("body", {},
 				h("div", { style: "width:400px;margin:16px" },
 					h("div", { style: "text-align:center" },
-						h("h5", {}, "Generate (random) fiscal codes")
+						h("h5", {}, en.title)
 					),
 					GeneratorForm(en),
 					h("div", { class: "form-group", style: "text-align:right" },
@@ -25,7 +25,9 @@ export default function Extension() {
 				),
 				h("script", { src: "bundle.js" })
 			)
-		).toString()
+		).encode(true),
+		"/_locales/en/messages.json": en.toMessages(),
+		"/_locales/it/messages.json": it.toMessages()
 	};
 
 }
