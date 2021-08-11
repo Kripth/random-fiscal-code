@@ -15,10 +15,25 @@ export default function(callback: (result: Result) => any) {
 
 	form.addEventListener("submit", (event: Event) => {
 		event.preventDefault();
-		// @ts-ignore
-		const entries = [...new FormData(form).entries()];
-		const options = Object.fromEntries(entries.filter(([, value]) => value)) as Options;
-		const result = generate(options);
+		const data = new FormData(form);
+		const get = (name: string): any => {
+			const value = data.get(name) as string;
+			if(value) {
+				const splitted = value.split(",");
+				if(splitted.length > 1) {
+					return splitted.map(v => v.trim());
+				}
+				return value;
+			}
+			return null;
+		};
+		const result = generate({
+			firstName: get("firstName"),
+			lastName: get("lastName"),
+			gender: get("gender"),
+			birthdate: get("birthdate"),
+			birthplace: get("birthplace")
+		} as Options);
 		for(const [ key, value ] of Object.entries(result)) {
 			(document.getElementById(key) as HTMLInputElement).value = value;
 		}
