@@ -13,6 +13,7 @@ export class LanguageGroup {
 	constructor(
 		public code: Translation,
 		public title: Translation,
+		public description: Translation,
 		public fiscalCode: Translation,
 		public firstName: Translation,
 		public lastName: Translation,
@@ -40,6 +41,7 @@ function t(key: string, value: string) {
 function group(
 	code: string,
 	title: string,
+	description: string,
 	fiscalCode: string,
 	firstName: string,
 	lastName: string,
@@ -56,6 +58,7 @@ function group(
 	return new LanguageGroup(
 		t("code", code),
 		t("title", title),
+		t("description", description),
 		t("fiscalCode", fiscalCode),
 		t("firstName", firstName),
 		t("lastName", lastName),
@@ -74,6 +77,7 @@ function group(
 export const en = group(
 	"en",
 	"Random Fiscal Code",
+	"Generate random and semi-random italian fiscal codes",
 	"Fiscal Code",
 	"First Name",
 	"Last Name",
@@ -91,6 +95,7 @@ export const en = group(
 export const it = group(
 	"it",
 	"Codice Fiscale Casuale",
+	"Genera codici fiscali casuali e semicasuali",
 	"Codice Fiscale",
 	"Nome",
 	"Cognome",

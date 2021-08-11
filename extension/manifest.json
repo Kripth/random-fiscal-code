@@ -1,6 +1,6 @@
 {
 	"name": "__MSG_title__",
-	"description": "Generate italian fiscal codes",
+	"description": "__MSG_description__",
 	"version": "1.0.0",
 	"manifest_version": 2,
 	"permissions": ["activeTab", "<all_urls>"],

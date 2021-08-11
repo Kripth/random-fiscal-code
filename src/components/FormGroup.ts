@@ -24,7 +24,7 @@ export default function FormGroup({ lang, label, name, disabled, action }: FormG
 		),
 		h("div", { class: "col-8" }, action ?
 			h("div", { class: "input-group" }, child,
-				h("button", { type: "button", class: "btn btn-primary tooltip tooltip-left", "data-action": action, "data-tooltip": action === "clear" ? lang.clear : lang.copy },
+				h("button", { type: "button", class: "btn btn-primary tooltip tooltip-left", tabindex: -1, "data-action": action, "data-tooltip": action === "clear" ? lang.clear : lang.copy },
 					h("i", { class: toIcon(action) })
 				)
 			) :
