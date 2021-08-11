@@ -23,14 +23,13 @@ function readImpl(fname, varname, encoded) {
 		if(error) {
 			console.error(error);
 		} else {
-			let total = 0;
 			const value = data.split("\n").slice(1)
 				.map(row => {
 					const [ name, enc, weight ] = row.split(",");
-					return { name, enc, weight: +weight };
+					return { name, enc, weight };
 				})
 				.sort((a, b) => b.weight - a.weight)
-				.map(({ name, enc, weight }) => `[${total += weight},"${name}"${encoded ? `,"${enc}"` : ""}]`)
+				.map(({ name, enc, weight }) => `[${weight},"${name}"${encoded ? `,"${enc}"` : ""}]`)
 				.join(",");
 			file += `export const ${varname} = parse(${value});\n`;
 		}
